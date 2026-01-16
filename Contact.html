@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Page | Web UMKM - KerajinanKita</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <style>
+      :root {
+        --bs-primary: rgb(150, 82, 39);
+        --bs-primary-rgb: 150, 82, 39;
+      }
+
+      .btn-primary {
+        background-color: rgb(150, 82, 39);
+        border-color: rgb(150, 82, 39);
+      }
+
+      .btn-primary:hover,
+      .btn-primary:focus,
+      .btn-primary:active {
+        background-color: rgb(130, 70, 30);
+        border-color: rgb(130, 70, 30);
+      }
+
+      .btn-outline-primary {
+        color: rgb(150, 82, 39);
+        border-color: rgb(150, 82, 39);
+      }
+
+      .btn-outline-primary:hover,
+      .btn-outline-primary:focus,
+      .btn-outline-primary.active {
+        background-color: rgb(150, 82, 39);
+        border-color: rgb(150, 82, 39);
+        color: white;
+      }
+
+      .page-item.active .page-link {
+        background-color: rgb(150, 82, 39);
+        border-color: rgb(150, 82, 39);
+      }
+
+      .page-link {
+        color: rgb(150, 82, 39);
+      }
+
+      .page-link:hover,
+      .page-link:focus {
+        color: rgb(130, 70, 30);
+      }
+
+      .special-gothic-expanded-one-regular {
+        font-family: "Special Gothic Expanded One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      .navbar {
+        transition: background-color 0.3s ease;
+        padding: 16px 50px 16px 50px;
+      }
+      .navbar-transparent {
+        background-color: transparent !important;
+      }
+      .navbar-scrolled {
+        background-color: rgb(219, 150, 107) !important;
+      }
+
+      .navbar-transparent .nav-link,
+      .navbar-transparent .navbar-brand {
+        color: #000 !important;
+      }
+
+      .navbar-scrolled .nav-link,
+      .navbar-scrolled .navbar-brand {
+        color: #fff !important;
+      }
+      .navbar-nav {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .nav-item {
+        margin: 0 15px;
+      }
+
+      .navbar-brand-centered {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .video-wrapper {
+        display: flex;
+        gap: 10px;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+
+      .video-bg {
+        flex: 1;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .object-fit-cover {
+        object-fit: cover;
+      }
+
+      .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .news-title {
+        font-family: "Special Gothic Expanded One", sans-serif;
+        font-size: 1.8rem;
+      }
+      .news-meta {
+        font-size: 0.9rem;
+        color: #777;
+      }
+      .news-section img {
+        border-radius: 10px;
+      }
+
+      .news-section img:hover {
+        filter: brightness(90%);
+        transition: all 0.3s ease-in-out;
+      }
+
+      footer {
+        position: relative;
+        z-index: 10;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      footer input,
+      footer textarea {
+        font-size: 0.9rem;
+      }
+
+      footer .form-control {
+        border-radius: 0.5rem;
+      }
+
+      footer i.bi {
+        transition: color 0.3s ease;
+      }
+
+      footer i.bi:hover {
+        color: #f5c542; /* efek hover */
+      }
+
+      @media (max-width: 767px) {
+        .navbar-brand-centered {
+          display: none !important;
+        }
+
+        .navbar-nav {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .nav-item {
+          margin: 10px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top navbar-transparent special-gothic-expanded-one-regular"
+    >
+      <div class="container">
+        <!-- Mobile Logo -->
+        <a class="navbar-brand d-lg-none" href="/">
+          <i class="bi bi-house-door-fill fs-4"></i>
+        </a>
+
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navigation Items -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto text-center align-items-center">
+            <!-- Left -->
+            <li class="nav-item">
+              <a class="nav-link" href="product.html">Product</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="about.html">About</a>
+            </li>
+
+            <!-- Desktop Logo (Centered) -->
+            <li class="nav-item d-none d-lg-block mx-3">
+              <a
+                class="navbar-brand m-0 d-flex justify-content-center"
+                href="/"
+              >
+                <i class="bi bi-house-door-fill fs-4"></i>
+              </a>
+            </li>
+            <!-- Right -->
+            <li class="nav-item">
+              <a class="nav-link" href="news.html">News</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <section class="contact-section py-5">
+      <div class="container">
+        <h2 class="special-gothic-expanded-one-regular text-center mt-5 mb-5">
+          Hubungi Kami
+        </h2>
+        <p class="text-center mb-5 text-muted">
+          Punya pertanyaan, kerja sama, atau ingin pesan khusus? Kami siap
+          membantu!
+        </p>
+        <div class="row">
+          <!-- Contact Form -->
+          <div class="col-md-6 mb-4">
+            <form>
+              <div class="mb-3">
+                <label for="name" class="form-label">Nama</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  placeholder="Nama Anda"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="email@anda.com"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Pesan</label>
+                <textarea
+                  class="form-control"
+                  id="message"
+                  rows="5"
+                  placeholder="Tulis pesan Anda di sini..."
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-dark">Kirim Pesan</button>
+            </form>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="col-md-6">
+            <div class="mb-4 d-flex align-items-start">
+              <i class="bi bi-geo-alt-fill me-3 fs-4 text-dark"></i>
+              <div>
+                <h6 class="mb-1">Alamat</h6>
+                <a class="mb-0" href="https://g.co/kgs/q2Spum2"
+                  >Jl. Kerajinan No. 12, Yogyakarta, Indonesia</a
+                >
+              </div>
+            </div>
+            <div class="mb-4 d-flex align-items-start">
+              <i class="bi bi-envelope-fill me-3 fs-4 text-dark"></i>
+              <div>
+                <h6 class="mb-1">Email</h6>
+                <a class="mb-0" href="https://mail.google.com/mail/u/0/"
+                  >customercare@kerajinankita.id</a
+                >
+              </div>
+            </div>
+            <div class="mb-4 d-flex align-items-start">
+              <i class="bi bi-telephone-fill me-3 fs-4 text-dark"></i>
+              <div>
+                <h6 class="mb-1">Telepon dan Whatsapp</h6>
+                <p class="mb-0">+62 812 3456 7890</p>
+              </div>
+            </div>
+            <div class="mb-4 d-flex align-items-start">
+              <i class="bi bi-instagram me-3 fs-4 text-dark"></i>
+              <div>
+                <h6 class="mb-1">Instagram</h6>
+                <a class="mb-0" href="https://www.instagram.com/"
+                  >@kerajinan_kita</a
+                >
+              </div>
+            </div>
+            <div class="mb-4 d-flex align-items-start">
+              <i class="bi bi-facebook me-3 fs-4 text-dark"></i>
+              <div>
+                <h6 class="mb-1">Facebook</h6>
+                <a class="mb-0" href="https://www.facebook.com/"
+                  >@kerajinan_kita_official</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-4 mt-5">
+      <div class="container">
+        <div class="row gy-4">
+          <!-- Navigasi -->
+          <div
+            class="col-md-3 col-sm-6"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <h5 class="text-uppercase fw-bold mb-3">Menu</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="/" class="text-white text-decoration-none">Home</a>
+              </li>
+              <li>
+                <a href="product.html" class="text-white text-decoration-none"
+                  >Product</a
+                >
+              </li>
+              <li>
+                <a href="about.html" class="text-white text-decoration-none"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a href="news.html" class="text-white text-decoration-none"
+                  >News</a
+                >
+              </li>
+              <li>
+                <a href="contact.html" class="text-white text-decoration-none"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Lokasi -->
+          <div
+            class="col-md-4 col-sm-6"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <h5 class="text-uppercase fw-bold mb-3">Alamat Produksi</h5>
+            <p>Jl. Kerajinan No. 12, Yogyakarta, Indonesia</p>
+            <div style="border-radius: 10px; overflow: hidden">
+              <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.9163009537147!2d110.3626150108614!3d-7.798686092188996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a573d72fa9355%3A0x5c1c527ea0a09e7e!2sMalioboro%20Yogyakarta!5e0!3m2!1sid!2sid!4v1744979528864!5m2!1sid!2sid" 
+              width="100%" 
+              height="200" 
+              style="border:0" 
+              allowfullscreen="" 
+              loading="lazy" >
+            </iframe>
+            </div>
+          </div>
+
+          <!-- Kontak & Form -->
+          <div
+            class="col-md-5 col-sm-12"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <h5 class="text-uppercase fw-bold mb-3">Hubungi Kami</h5>
+            <p><strong>Telepon:</strong> +62 812-3456-7890</p>
+            <p>
+              <strong>Email:</strong>
+              <a
+                href="mailto:customercare@kerajinankita.id"
+                class="text-white text-decoration-none"
+                >customercare@kerajinankita.id</a
+              >
+            </p>
+
+            <!-- Form Kontak -->
+            <form>
+              <div class="mb-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nama Anda"
+                  required
+                />
+              </div>
+              <div class="mb-2">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Email Anda"
+                  required
+                />
+              </div>
+              <div class="mb-2">
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  placeholder="Pesan Anda"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-light btn-sm mt-2">
+                Kirim
+              </button>
+            </form>
+
+            <!-- Sosial Media -->
+            <div class="mt-4">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                class="text-white me-3 fs-4"
+                ><i class="bi bi-instagram"></i
+              ></a>
+              <a
+                href="https://www.whatsapp.com/"
+                target="_blank"
+                class="text-white me-3 fs-4"
+                ><i class="bi bi-whatsapp"></i
+              ></a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                class="text-white fs-4"
+                ><i class="bi bi-facebook"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Garis & Copyright -->
+        <hr class="mt-5" style="border-color: rgba(255, 255, 255, 0.2)" />
+        <div class="text-center">
+          <small>&copy; 2025 kerajinankita UMKM. All rights reserved.</small>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <script>
+      const navbar = document.querySelector(".navbar");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+          navbar.classList.remove("navbar-transparent");
+          navbar.classList.add("navbar-scrolled");
+        } else {
+          navbar.classList.add("navbar-transparent");
+          navbar.classList.remove("navbar-scrolled");
+        }
+      });
+    </script>
+    <script>
+      function handleNavbarStyle() {
+        const isScrolled = window.scrollY > 50;
+        const isMobile = window.innerWidth < 992; // 992px adalah breakpoint lg di Bootstrap
+
+        if (isScrolled || isMobile) {
+          navbar.classList.remove("navbar-transparent");
+          navbar.classList.add("navbar-scrolled");
+        } else {
+          navbar.classList.add("navbar-transparent");
+          navbar.classList.remove("navbar-scrolled");
+        }
+      }
+
+      window.addEventListener("scroll", handleNavbarStyle);
+      window.addEventListener("resize", handleNavbarStyle);
+      window.addEventListener("DOMContentLoaded", handleNavbarStyle);
+    </script>
+  </body>
+</html>

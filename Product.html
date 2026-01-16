@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product page | Web UMKM - KerajinanKita</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <style>
+      :root {
+        --bs-primary: rgb(150, 82, 39);
+        --bs-primary-rgb: 150, 82, 39;
+      }
+
+      .btn-primary {
+        background-color: rgb(150, 82, 39);
+        border-color: rgb(150, 82, 39);
+      }
+
+      .btn-primary:hover,
+      .btn-primary:focus,
+      .btn-primary:active {
+        background-color: rgb(130, 70, 30);
+        border-color: rgb(130, 70, 30);
+      }
+
+      .btn-outline-primary {
+        color: rgb(150, 82, 39);
+        border-color: rgb(150, 82, 39);
+      }
+
+      .btn-outline-primary:hover,
+      .btn-outline-primary:focus,
+      .btn-outline-primary.active {
+        background-color: rgb(150, 82, 39);
+        border-color: rgb(150, 82, 39);
+        color: white;
+      }
+
+      .page-item.active .page-link {
+        background-color: rgb(150, 82, 39);
+        border-color: rgb(150, 82, 39);
+      }
+
+      .page-link {
+        color: rgb(150, 82, 39);
+      }
+
+      .page-link:hover,
+      .page-link:focus {
+        color: rgb(130, 70, 30);
+      }
+
+      .special-gothic-expanded-one-regular {
+        font-family: "Special Gothic Expanded One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      .navbar {
+        transition: background-color 0.3s ease;
+        padding: 16px 50px 16px 50px;
+      }
+      .navbar-transparent {
+        background-color: transparent !important;
+      }
+      .navbar-scrolled {
+        background-color: rgb(219, 150, 107) !important;
+      }
+
+      .navbar-transparent .nav-link,
+      .navbar-transparent .navbar-brand {
+        color: #000 !important;
+      }
+
+      .navbar-scrolled .nav-link,
+      .navbar-scrolled .navbar-brand {
+        color: #fff !important;
+      }
+      .navbar-nav {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .nav-item {
+        margin: 0 15px;
+      }
+
+      .navbar-brand-centered {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      footer {
+        position: relative;
+        z-index: 10;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      footer input,
+      footer textarea {
+        font-size: 0.9rem;
+      }
+
+      footer .form-control {
+        border-radius: 0.5rem;
+      }
+
+      footer i.bi {
+        transition: color 0.3s ease;
+      }
+
+      footer i.bi:hover {
+        color: #f5c542; /* efek hover */
+      }
+
+      @media (max-width: 767px) {
+        .navbar-brand-centered {
+          display: none !important;
+        }
+
+        .navbar-nav {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .nav-item {
+          margin: 10px 0;
+        }
+      }
+
+      /* Toast notification style */
+      .toast-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top navbar-transparent special-gothic-expanded-one-regular"
+    >
+      <div class="container">
+        <!-- Mobile Logo -->
+        <a class="navbar-brand d-lg-none" href="/">
+          <i class="bi bi-house-door-fill fs-4"></i>
+        </a>
+
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navigation Items -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto text-center align-items-center">
+            <!-- Left -->
+            <li class="nav-item">
+              <a class="nav-link" href="product.html">Product</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="about.html">About</a>
+            </li>
+
+            <!-- Desktop Logo (Centered) -->
+            <li class="nav-item d-none d-lg-block mx-3">
+              <a
+                class="navbar-brand m-0 d-flex justify-content-center"
+                href="/"
+              >
+                <i class="bi bi-house-door-fill fs-4"></i>
+              </a>
+            </li>
+            <!-- Right -->
+            <li class="nav-item">
+              <a class="nav-link" href="news.html">News</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Product Section -->
+    <section id="product" class="py-5 bg-light">
+      <div class="container">
+        <h2 class="text-center mt-5 mb-5 special-gothic-expanded-one-regular">
+          Produk Kami
+        </h2>
+        <div class="container mb-4">
+          <div class="row">
+            <div class="col-md-4">
+              <label for="filter-category" class="form-label"
+                >Filter Kategori</label
+              >
+              <select
+                class="form-select"
+                id="filter-category"
+                onchange="filterProducts()"
+              >
+                <!-- kategori -->
+                <option value="all">Semua</option>
+                <option value="dompet">Dompet</option>
+                <option value="tas">Tas</option>
+                <option value="jaket">Jaket</option>
+              </select>
+            </div>
+            <div class="col-md-4 ms-auto">
+              <label class="form-label">Tampilan</label>
+              <div class="btn-group w-100" role="group">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary active"
+                  id="card-view-btn"
+                  onclick="changeView('card')"
+                >
+                  <i class="bi bi-grid"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary"
+                  id="table-view-btn"
+                  onclick="changeView('table')"
+                >
+                  <i class="bi bi-list"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Card View Container (default) -->
+        <div class="container" id="card-view">
+          <div
+            class="row row-cols-1 row-cols-md-3 g-4"
+            id="produk-container"
+          ></div>
+        </div>
+
+        <!-- Table View Container (initially hidden) -->
+        <div class="container d-none" id="table-view">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Nama</th>
+                  <th>Harga</th>
+                  <th>Stok</th>
+                  <th>Kategori</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="produk-table"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="container mt-4">
+          <nav aria-label="Product pagination">
+            <ul class="pagination justify-content-center" id="pagination"></ul>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toast notification for add to cart -->
+    <div class="toast-container">
+      <div
+        class="toast align-items-center text-white bg-success border-0"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        id="addToCartToast"
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            Produk berhasil ditambahkan ke keranjang!
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <script>
+      const navbar = document.querySelector(".navbar");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+          navbar.classList.remove("navbar-transparent");
+          navbar.classList.add("navbar-scrolled");
+        } else {
+          navbar.classList.add("navbar-transparent");
+          navbar.classList.remove("navbar-scrolled");
+        }
+      });
+    </script>
+    <script>
+      function handleNavbarStyle() {
+        const isScrolled = window.scrollY > 50;
+        const isMobile = window.innerWidth < 992; // 992px adalah breakpoint lg di Bootstrap
+
+        if (isScrolled || isMobile) {
+          navbar.classList.remove("navbar-transparent");
+          navbar.classList.add("navbar-scrolled");
+        } else {
+          navbar.classList.add("navbar-transparent");
+          navbar.classList.remove("navbar-scrolled");
+        }
+      }
+
+      window.addEventListener("scroll", handleNavbarStyle);
+      window.addEventListener("resize", handleNavbarStyle);
+      window.addEventListener("DOMContentLoaded", handleNavbarStyle);
+    </script>
+
+    <div id="produk-container"></div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-4 mt-5">
+      <div class="container">
+        <div class="row gy-4">
+          <!-- Navigasi -->
+          <div
+          class="col-md-3 col-sm-6"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <h5 class="text-uppercase fw-bold mb-3">Menu</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a href="/" class="text-white text-decoration-none">Home</a>
+            </li>
+            <li>
+              <a href="product.html" class="text-white text-decoration-none"
+                >Product</a
+              >
+            </li>
+            <li>
+              <a href="about.html" class="text-white text-decoration-none"
+                >About</a
+              >
+            </li>
+            <li>
+              <a href="news.html" class="text-white text-decoration-none"
+                >News</a
+              >
+            </li>
+            <li>
+              <a href="contact.html" class="text-white text-decoration-none"
+                >Contact</a
+              >
+            </li>
+          </ul>
+          </div>
+
+          <!-- Lokasi -->
+          <div
+            class="col-md-4 col-sm-6"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <h5 class="text-uppercase fw-bold mb-3">Alamat Produksi</h5>
+            <p>Jl. Kerajinan No. 12, Yogyakarta, Indonesia</p>
+            <div style="border-radius: 10px; overflow: hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.9163009537147!2d110.3626150108614!3d-7.798686092188996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a573d72fa9355%3A0x5c1c527ea0a09e7e!2sMalioboro%20Yogyakarta!5e0!3m2!1sid!2sid!4v1744979528864!5m2!1sid!2sid"
+                width="100%"
+                height="200"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- Kontak & Form -->
+          <div
+            class="col-md-5 col-sm-12"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <h5 class="text-uppercase fw-bold mb-3">Hubungi Kami</h5>
+            <p><strong>Telepon:</strong> +62 812-3456-7890</p>
+            <p>
+              <strong>Email:</strong>
+              <a
+                href="mailto:customercare@kerajinankita.id"
+                class="text-white text-decoration-none"
+                >customercare@kerajinankita.id</a
+              >
+            </p>
+
+            <!-- Form Kontak -->
+            <form>
+              <div class="mb-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nama Anda"
+                  required
+                />
+              </div>
+              <div class="mb-2">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Email Anda"
+                  required
+                />
+              </div>
+              <div class="mb-2">
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  placeholder="Pesan Anda"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-light btn-sm mt-2">
+                Kirim
+              </button>
+            </form>
+
+            <!-- Sosial Media -->
+            <div class="mt-4">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                class="text-white me-3 fs-4"
+                ><i class="bi bi-instagram"></i
+              ></a>
+              <a
+                href="https://www.whatsapp.com/"
+                target="_blank"
+                class="text-white me-3 fs-4"
+                ><i class="bi bi-whatsapp"></i
+              ></a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                class="text-white fs-4"
+                ><i class="bi bi-facebook"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Garis & Copyright -->
+        <hr class="mt-5" style="border-color: rgba(255, 255, 255, 0.2)" />
+        <div class="text-center">
+          <small>&copy; 2025 kerajinankita UMKM. All rights reserved.</small>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      let allProducts = [];
+      let currentPage = 1;
+      const itemsPerPage = 6;
+      let currentView = "card";
+      let currentCategory = "all";
+      const SHEET_URL =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vTVLdykdjAbNzREUgHX549VEg6emNlw0rMzqjhz5dkc-XQtrejEYbhOvlLnIA8MzSDLSP0F7ZWaWsF-/pub?gid=0&single=true&output=csv";
+
+      // Function to handle adding a product to cart
+      function addToCart(product) {
+        // Get existing cart or initialize new cart
+        let cart = JSON.parse(localStorage.getItem("shoppingCart")) || [];
+
+        // Check if product already exists in cart
+        const existingProductIndex = cart.findIndex(
+          (item) => item.id === product.id
+        );
+
+        if (existingProductIndex !== -1) {
+          // Increment quantity if product already exists
+          cart[existingProductIndex].qty += 1;
+        } else {
+          // Add new product with quantity 1
+          cart.push({
+            id: product.id,
+            nama: product.nama,
+            harga: product.harga,
+            gambar: product.gambar,
+            qty: 1,
+          });
+        }
+
+        // Save updated cart to localStorage
+        localStorage.setItem("shoppingCart", JSON.stringify(cart));
+
+        // Show toast notification
+        const toast = new bootstrap.Toast(
+          document.getElementById("addToCartToast")
+        );
+        toast.show();
+
+        // Navigate to order.html after a short delay
+        setTimeout(() => {
+          window.location.href = "order.html";
+        }, 800);
+      }
+
+      // Function to extract numeric price from string
+      function extractPrice(priceString) {
+        const numericMatch = priceString.match(/\d+/);
+        if (numericMatch) {
+          return parseInt(numericMatch[0], 10);
+        }
+        return 0;
+      }
+
+      function parseCSVRow(row) {
+        const result = [];
+        let startIdx = 0;
+        let inQuotes = false;
+
+        for (let i = 0; i < row.length; i++) {
+          if (row[i] === '"') {
+            inQuotes = !inQuotes;
+          } else if ((row[i] === "," && !inQuotes) || i === row.length - 1) {
+            let endIdx = i === row.length - 1 ? i + 1 : i;
+            let field = row.substring(startIdx, endIdx);
+
+            if (field.startsWith('"') && field.endsWith('"')) {
+              field = field.substring(1, field.length - 1);
+            }
+
+            result.push(field);
+            startIdx = i + 1;
+          }
+        }
+
+        return result;
+      }
+
+      function changeView(viewType) {
+        currentView = viewType;
+
+        // Update button states
+        document
+          .getElementById("card-view-btn")
+          .classList.toggle("active", viewType === "card");
+        document
+          .getElementById("table-view-btn")
+          .classList.toggle("active", viewType === "table");
+
+        // Hide/show appropriate containers
+        document
+          .getElementById("card-view")
+          .classList.toggle("d-none", viewType !== "card");
+        document
+          .getElementById("table-view")
+          .classList.toggle("d-none", viewType !== "table");
+
+        // Refresh the display with current filters and pagination
+        displayProducts();
+      }
+
+      // Function to filter products by category
+      function filterProducts() {
+        currentCategory = document.getElementById("filter-category").value;
+        currentPage = 1; // Reset to first page when filtering
+        displayProducts();
+      }
+
+      // Function to display products with current filters and pagination
+      function displayProducts() {
+        // Filter products by category
+        let filteredProducts = allProducts;
+        if (currentCategory !== "all") {
+          filteredProducts = allProducts.filter(
+            (product) => product.kategori === currentCategory
+          );
+        }
+
+        // Calculate pagination
+        const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(
+          startIndex + itemsPerPage,
+          filteredProducts.length
+        );
+        const currentProducts = filteredProducts.slice(startIndex, endIndex);
+
+        // Update the view
+        if (currentView === "card") {
+          displayCardView(currentProducts);
+        } else {
+          displayTableView(currentProducts);
+        }
+
+        // Update pagination controls
+        updatePagination(totalPages);
+      }
+
+      // Function to display products in card view
+      function displayCardView(products) {
+        const container = document.getElementById("produk-container");
+        container.innerHTML = "";
+
+        if (products.length === 0) {
+          container.innerHTML = `
+      <div class="col-12 text-center">
+        <div class="alert alert-info">
+          Tidak ada produk yang tersedia untuk kategori ini.
+        </div>
+      </div>
+    `;
+          return;
+        }
+
+        products.forEach((product) => {
+          const col = document.createElement("div");
+          col.className = "col";
+          col.innerHTML = `
+      <div class="card h-100" data-bs-toggle="modal" data-bs-target="#modalProduk${
+        product.id
+      }">
+        <img src="${product.gambar}" class="card-img-top" alt="${
+            product.nama
+          }" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+        <div class="card-body">
+          <h5 class="card-title">${product.nama}</h5>
+          <p class="card-text">${product.deskripsi.slice(0, 80)}...</p>
+          <p class="card-text"><small class="text-muted">Kategori: ${
+            product.kategori || "Umum"
+          }</small></p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Rp ${product.harga.toLocaleString()}</small>
+        </div>
+      </div>
+
+      <!-- Modal Produk -->
+      <div class="modal fade" id="modalProduk${
+        product.id
+      }" tabindex="-1" aria-labelledby="modalProduk${
+            product.id
+          }Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalProduk${product.id}Label">${
+            product.nama
+          }</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="${product.gambar}" class="img-fluid" alt="${
+            product.nama
+          }" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'" />
+                </div>
+                <div class="col-md-6">
+                  <p>${product.deskripsi}</p>
+                  <p><strong>Harga:</strong> Rp ${product.harga.toLocaleString()}</p>
+                  <p><strong>Stok:</strong> ${product.stok}</p>
+                  <p><strong>Kategori:</strong> ${
+                    product.kategori || "Umum"
+                  }</p>
+                  <button class="btn btn-primary" id="product-${
+                    product.id
+                  }-btn">Pesan Sekarang</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+          container.appendChild(col);
+
+          // Add event listener after the element is in DOM
+          setTimeout(() => {
+            const orderButton = document.getElementById(
+              `product-${product.id}-btn`
+            );
+            if (orderButton) {
+              orderButton.addEventListener("click", function () {
+                addToCart(product);
+              });
+            }
+          }, 100);
+        });
+      }
+
+      // Function to display products in table view
+      function displayTableView(products) {
+        const tableBody = document.getElementById("produk-table");
+        const modalContainer = document.getElementById("modal-container") || createModalContainer();
+        
+        tableBody.innerHTML = "";
+        modalContainer.innerHTML = ""; 
+        
+        if (products.length === 0) {
+          tableBody.innerHTML = `
+          <tr>
+            <td colspan="5" class="text-center">Tidak ada produk yang tersedia untuk kategori ini.</td>
+          </tr>
+          `;
+          return;
+        }
+
+        products.forEach((product) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${product.nama}</td>
+            <td>Rp ${product.harga.toLocaleString()}</td>
+            <td>${product.stok}</td>
+            <td>${product.kategori || "Umum"}</td>
+            <td>
+              <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalTableProduk${product.id}">
+                Detail
+              </button>
+            </td>
+          `;
+          
+          tableBody.appendChild(row);
+          
+          // Create modal for this product
+          const modalDiv = document.createElement("div");
+          modalDiv.innerHTML = `
+            <!-- Modal Produk -->
+            <div class="modal fade" id="modalTableProduk${product.id}" tabindex="-1" aria-labelledby="modalTableProduk${product.id}Label" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalTableProduk${product.id}Label">${product.nama}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <img src="${product.gambar}" class="img-fluid" alt="${product.nama}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'" />
+                      </div>
+                      <div class="col-md-6">
+                        <p>${product.deskripsi}</p>
+                        <p><strong>Harga:</strong> Rp ${product.harga.toLocaleString()}</p>
+                        <p><strong>Stok:</strong> ${product.stok}</p>
+                        <p><strong>Kategori:</strong> ${product.kategori || "Umum"}</p>
+                        <button class="btn btn-primary" id="table-product-${product.id}-btn">Pesan Sekarang</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          
+          modalContainer.appendChild(modalDiv);
+          
+          // Add event listener after the element is in DOM
+          setTimeout(() => {
+            const orderButton = document.getElementById(`table-product-${product.id}-btn`);
+            if (orderButton) {
+              orderButton.addEventListener("click", function() {
+                addToCart(product);
+              });
+            }
+          }, 100);
+        });
+      }
+
+      // Helper function to create modal container if it doesn't exist
+      function createModalContainer() {
+        const container = document.createElement("div");
+        container.id = "modal-container";
+        document.body.appendChild(container);
+        return container;
+      }
+
+      // Function to update pagination controls
+      function updatePagination(totalPages) {
+        const paginationElement = document.getElementById("pagination");
+        paginationElement.innerHTML = "";
+
+        if (totalPages <= 1) {
+          return;
+        }
+
+        // Previous button
+        const prevLi = document.createElement("li");
+        prevLi.className = `page-item ${currentPage === 1 ? "disabled" : ""}`;
+        prevLi.innerHTML = `
+        <a class="page-link" href="#" aria-label="Previous" onclick="changePage(${
+          currentPage - 1
+        })">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      `;
+        paginationElement.appendChild(prevLi);
+
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+          const li = document.createElement("li");
+          li.className = `page-item ${currentPage === i ? "active" : ""}`;
+          li.innerHTML = `<a class="page-link" href="#" onclick="changePage(${i})">${i}</a>`;
+          paginationElement.appendChild(li);
+        }
+
+        // Next button
+        const nextLi = document.createElement("li");
+        nextLi.className = `page-item ${
+          currentPage === totalPages ? "disabled" : ""
+        }`;
+        nextLi.innerHTML = `
+        <a class="page-link" href="#" aria-label="Next" onclick="changePage(${
+          currentPage + 1
+        })">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      `;
+        paginationElement.appendChild(nextLi);
+      }
+
+      // Function to change current page
+      function changePage(page) {
+        currentPage = page;
+        displayProducts();
+
+        document
+          .getElementById(currentView === "card" ? "card-view" : "table-view")
+          .scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        return false;
+      }
+
+      function populateCategoryFilter() {
+        const categories = [
+          ...new Set(allProducts.map((product) => product.kategori)),
+        ].filter(Boolean);
+        const filter = document.getElementById("filter-category");
+
+        // Keep the "All" option and add unique categories
+        const currentOptions = Array.from(filter.options).map(
+          (opt) => opt.value
+        );
+
+        categories.forEach((category) => {
+          if (!currentOptions.includes(category)) {
+            const option = document.createElement("option");
+            option.value = category;
+            option.textContent = category;
+            filter.appendChild(option);
+          }
+        });
+      }
+
+      // Add Bootstrap Icons for the view buttons
+      document.head.insertAdjacentHTML(
+        "beforeend",
+        `
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    `
+      );
+
+      fetch(SHEET_URL)
+        .then((res) => res.text())
+        .then((csv) => {
+          const rows = csv.trim().split("\n").slice(1);
+          const container = document.getElementById("produk-container");
+          allProducts = [];
+
+          rows.forEach((row, index) => {
+            const fields = parseCSVRow(row);
+
+            if (fields.length < 6) return;
+
+            const nama = fields[0].trim();
+            const gambar = fields[1].trim();
+            const stok = parseInt(fields[2], 10);
+            const hargaRaw = fields[3].trim();
+            const deskripsi = fields[4].trim();
+            const kategori = fields[5]?.trim();
+
+            if (isNaN(stok) || stok <= 0) return;
+
+            // Extract numeric price
+            const harga = extractPrice(hargaRaw);
+
+            const modalId = `modalProduk${index}`;
+            const productId = `product-${index}`;
+
+            allProducts.push({
+              id: index,
+              nama,
+              gambar,
+              stok,
+              harga,
+              deskripsi,
+              kategori,
+            });
+
+            const col = document.createElement("div");
+            col.className = "col";
+            col.innerHTML = `
+            <div class="card h-100" data-bs-toggle="modal" data-bs-target="#${modalId}">
+              <img src="${gambar}" class="card-img-top" alt="${nama}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+              <div class="card-body">
+                <h5 class="card-title">${nama}</h5>
+                <p class="card-text">${deskripsi.slice(0, 80)}...</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Rp ${harga.toLocaleString()}</small>
+              </div>
+            </div>
+  
+            <!-- Modal Produk -->
+            <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="${modalId}Label" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="${modalId}Label">${nama}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <img src="${gambar}" class="img-fluid" alt="${nama}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'" />
+                      </div>
+                      <div class="col-md-6">
+                        <p>${deskripsi}</p>
+                        <p><strong>Harga:</strong> Rp ${harga.toLocaleString()}</p>
+                        <p><strong>Stok:</strong> ${stok}</p>
+                        <button class="btn btn-primary" id="${productId}-btn" >Pesan Sekarang</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+
+            container.appendChild(col);
+
+            // Add event listener to the button after the element is added to DOM
+            setTimeout(() => {
+              const orderButton = document.getElementById(`${productId}-btn`);
+              if (orderButton) {
+                orderButton.addEventListener("click", function () {
+                  // Create product object
+                  const product = {
+                    id: productId,
+                    nama: nama,
+                    harga: harga,
+                    gambar: gambar,
+                    stok: stok,
+                  };
+
+                  function addToCart(product) {
+                    // Get existing cart or initialize new cart
+                    let cart =
+                      JSON.parse(localStorage.getItem("shoppingCart")) || [];
+
+                    // Check if product already exists in cart
+                    const existingProductIndex = cart.findIndex(
+                      (item) => item.id === product.id
+                    );
+
+                    if (existingProductIndex !== -1) {
+                      // Increment quantity if product already exists
+                      cart[existingProductIndex].qty += 1;
+                    } else {
+                      // Add new product with quantity 1
+                      cart.push({
+                        id: product.id,
+                        nama: product.nama,
+                        harga: product.harga,
+                        gambar: product.gambar,
+                        qty: 1,
+                        kategori: product.kategori || "general", // Add kategori for compatibility with order.html
+                      });
+                    }
+
+                    // Save updated cart to localStorage
+                    localStorage.setItem("shoppingCart", JSON.stringify(cart));
+
+                    // Show toast notification
+                    const toast = new bootstrap.Toast(
+                      document.getElementById("addToCartToast")
+                    );
+                    toast.show();
+
+                    // Navigate to order.html after a short delay
+                    setTimeout(() => {
+                      window.location.href = "order.html";
+                    }, 800);
+                  }
+                });
+              }
+            }, 100);
+          });
+
+          populateCategoryFilter();
+
+          displayProducts();
+        })
+
+        .catch((error) => {
+          console.error("Error loading products:", error);
+          document.getElementById("produk-container").innerHTML = `
+          <div class="col-12 text-center">
+            <div class="alert alert-danger">
+              Gagal memuat produk. Silakan coba lagi nanti.
+            </div>
+          </div>
+        `;
+        });
+    </script>
+  </body>
+</html>

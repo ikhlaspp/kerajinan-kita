@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Page | Web UMKM - KerajinanKita</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      :root {
+        --bs-primary: rgb(150, 82, 39);
+        --bs-primary-rgb: 150, 82, 39;
+      }
+
+      .btn-primary {
+        background-color: rgb(150, 82, 39);
+        border-color: rgb(150, 82, 39);
+      }
+
+      .btn-primary:hover,
+      .btn-primary:focus,
+      .btn-primary:active {
+        background-color: rgb(130, 70, 30);
+        border-color: rgb(130, 70, 30);
+      }
+
+      .btn-outline-primary {
+        color: rgb(150, 82, 39);
+        border-color: rgb(150, 82, 39);
+      }
+
+      .btn-outline-primary:hover,
+      .btn-outline-primary:focus,
+      .btn-outline-primary.active {
+        background-color: rgb(150, 82, 39);
+        border-color: rgb(150, 82, 39);
+        color: white;
+      }
+
+      .page-item.active .page-link {
+        background-color: rgb(150, 82, 39);
+        border-color: rgb(150, 82, 39);
+      }
+
+      .page-link {
+        color: rgb(150, 82, 39);
+      }
+
+      .page-link:hover,
+      .page-link:focus {
+        color: rgb(130, 70, 30);
+      }
+
+      .product-card {
+        margin-bottom: 20px;
+      }
+      .product-card img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .card {
+        transition: box-shadow 0.3s ease;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        position: relative;
+      }
+      .card:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.1);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        pointer-events: none;
+      }
+      .card:hover::after {
+        opacity: 1;
+      }
+
+      .qty-control {
+        display: flex;
+        align-items: center;
+      }
+
+      .qty-control .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+      }
+
+      .qty-control .qty {
+        margin: 0 0.3rem;
+      }
+
+      /* View toggle styling */
+      .view-toggle {
+        margin-bottom: 1rem;
+      }
+
+      .view-toggle .btn-group {
+        margin-left: 0.5rem;
+      }
+
+      /* Pagination styling */
+      .pagination-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Table view styling */
+      .table-view-container {
+        display: none;
+      }
+
+      /* Card view styling */
+      .card-view-container {
+        display: block;
+      }
+    </style>
+  </head>
+  <body class="container py-4">
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-light mb-4">
+      <div class="container-fluid">
+        <a class="btn btn-outline-primary" href="product.html">
+          <i class="bi bi-arrow-left"></i> Kembali
+        </a>
+      </div>
+    </nav>
+
+    <!-- Product Selection -->
+    <h2 class="mb-4">Pilih Produk</h2>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="d-flex justify-content-between mb-4">
+          <div>
+            <label for="filter-category" class="form-label"
+              >Filter Kategori</label
+            >
+            <select
+              class="form-select"
+              id="filter-category"
+              onchange="filterProducts()"
+            >
+              <option value="all">Semua</option>
+              <option value="dompet">dompet</option>
+              <option value="tas">tas</option>
+              <option value="jaket">jaket</option>
+            </select>
+          </div>
+          <div class="view-toggle d-flex align-items-end">
+            <label class="me-2">Tampilan:</label>
+            <div class="btn-group w-50" role="group">
+              <button
+                type="button"
+                class="btn btn-outline-primary active"
+                id="card-view-btn"
+                onclick="switchView('card')"
+              >
+                <i class="bi bi-grid"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                id="table-view-btn"
+                onclick="switchView('table')"
+              >
+                <i class="bi bi-list"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card View Container -->
+        <div class="card-view-container">
+          <div class="row" id="product-list"></div>
+        </div>
+
+        <!-- Table View Container -->
+        <div class="table-view-container">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Nama</th>
+                  <th>Harga</th>
+                  <th>Kategori</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="product-table"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container">
+          <nav aria-label="Product pagination">
+            <ul class="pagination" id="pagination"></ul>
+          </nav>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Keranjang</h5>
+            <form id="order-info" class="mb-3">
+              <div class="mb-2 d-flex justify-content-between align-items-center">
+                <label for="namaPemesan" class="form-label">Nama Pemesan</label>
+                <a href="#" id="clear-form" class="text-danger" style="font-size: 0.9rem;">Clear Form</a>
+              </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="namaPemesan"
+                  placeholder="Masukkan nama Anda"
+                  required
+                />
+              <div class="mb-2">
+                <label for="alamatPemesan" class="form-label"
+                  >Alamat Pemesan</label
+                >
+                <textarea
+                  class="form-control"
+                  id="alamatPemesan"
+                  rows="2"
+                  placeholder="Masukkan alamat pengiriman"
+                  required
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="metodePembayaran" class="form-label"
+                  >Metode Pembayaran</label
+                >
+                <select class="form-select" id="metodePembayaran" required>
+                  <option value="">Pilih metode pembayaran</option>
+                  <option value="transfer">Transfer Bank</option>
+                  <option value="cod">Bayar di Tempat (COD)</option>
+                  <option value="ewallet">E-Wallet</option>
+                </select>
+              </div>
+            </form>
+            <ul class="list-group mb-3" id="cart-items"></ul>
+            <h6>Total: <span id="cart-total">Rp 0</span></h6>
+            <button class="btn btn-primary w-100 mb-2" onclick="checkout()">
+              Checkout
+            </button>
+            <button id="clear-cart-btn" class="btn btn-outline-danger w-100" onclick="clearCart()">
+              Hapus Semua Item
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Modals -->
+    <!-- Empty Cart Modal -->
+    <div
+      class="modal fade"
+      id="emptyCartModal"
+      tabindex="-1"
+      aria-labelledby="emptyCartModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="emptyCartModalLabel">Perhatian</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>Keranjang kosong!</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div
+      class="modal fade"
+      id="successModal"
+      tabindex="-1"
+      aria-labelledby="successModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title" id="successModalLabel">Sukses</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center mb-3">
+              <i
+                class="bi bi-check-circle-fill text-success"
+                style="font-size: 3rem"
+              ></i>
+            </div>
+            <p class="text-center">Pesanan berhasil dikirim!</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-success"
+              data-bs-dismiss="modal"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div
+      class="modal fade"
+      id="errorModal"
+      tabindex="-1"
+      aria-labelledby="errorModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title" id="errorModalLabel">Error</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center mb-3">
+              <i
+                class="bi bi-exclamation-triangle-fill text-danger"
+                style="font-size: 3rem"
+              ></i>
+            </div>
+            <p class="text-center" id="errorMessage">Gagal mengirim pesanan.</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div
+      class="modal fade"
+      id="loadingModal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="loadingModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body text-center p-4">
+            <div class="spinner-border text-primary mb-3" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Memproses pesanan Anda...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- delete modal -->
+    <div
+      class="modal fade"
+      id="clearCartModal"
+      tabindex="-1"
+      aria-labelledby="clearCartModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title" id="clearCartModalLabel">Konfirmasi</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>Apakah Anda yakin ingin menghapus semua item dari keranjang?</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Batal
+            </button>
+            <button type="button" class="btn btn-danger" id="confirmClearCart">
+              Hapus Semua
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const sheetURL =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vTVLdykdjAbNzREUgHX549VEg6emNlw0rMzqjhz5dkc-XQtrejEYbhOvlLnIA8MzSDLSP0F7ZWaWsF-/pub?gid=0&single=true&output=csv";
+      const webAppURL =
+        "https://script.google.com/macros/s/AKfycbyb-DY-7WJjA0p7PuJmucSInU_vPS9x6ZDDWTHB3VdaRJCsXTpItKy7xBcEC8jNENMd/exec";
+
+      let cart = [];
+      let allProducts = [];
+      let filteredProducts = [];
+      let productIndex = 0;
+      let currentPage = 1;
+      let itemsPerPage = 6;
+      let currentView = "card";
+
+      let modals = {};
+
+      function loadCartFromLocalStorage() {
+        const savedCart = localStorage.getItem("shoppingCart");
+        if (savedCart) {
+          cart = JSON.parse(savedCart);
+          renderCart();
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        loadProducts();
+        loadCartFromLocalStorage();
+
+        addConfirmationModal();
+
+        modals.emptyCart = new bootstrap.Modal(
+          document.getElementById("emptyCartModal")
+        );
+        modals.success = new bootstrap.Modal(
+          document.getElementById("successModal")
+        );
+        modals.error = new bootstrap.Modal(
+          document.getElementById("errorModal")
+        );
+        modals.loading = new bootstrap.Modal(
+          document.getElementById("loadingModal")
+        );
+
+        const clearFormBtn = document.getElementById("clear-form");
+        if (clearFormBtn) {
+          checkFormContent();
+          
+          clearFormBtn.addEventListener("click", function() {
+            document.getElementById("namaPemesan").value = "";
+            document.getElementById("alamatPemesan").value = "";
+            document.getElementById("metodePembayaran").selectedIndex = 0;
+
+            clearFormBtn.style.display = "none";
+          });
+        }
+
+        document.getElementById("namaPemesan").addEventListener("input", checkFormContent);
+        document.getElementById("alamatPemesan").addEventListener("input", checkFormContent);
+        document.getElementById("metodePembayaran").addEventListener("change", checkFormContent);
+
+        document
+          .getElementById("successModal")
+          .addEventListener("hidden.bs.modal", () => {
+            loadProducts();
+          });
+
+        const confirmClearBtn = document.getElementById("confirmClearCart");
+        if (confirmClearBtn) {
+          confirmClearBtn.addEventListener("click", function() {
+            cart = [];
+            localStorage.removeItem("shoppingCart");
+            renderCart();
+            const clearCartModal = bootstrap.Modal.getInstance(document.getElementById("clearCartModal"));
+            clearCartModal.hide();
+          });
+        }
+
+        const clearCartBtn = document.getElementById("clear-cart-btn");
+        if (clearCartBtn) {
+          if (cart.length === 0) {
+            clearCartBtn.style.display = "none";
+          } else {
+            clearCartBtn.style.display = "block";
+          }
+        }
+      });
+
+      function renderCart() {
+        const cartList = document.getElementById("cart-items");
+        const totalDisplay = document.getElementById("cart-total");
+        const clearCartBtn = document.getElementById("clear-cart-btn"); 
+        
+        cartList.innerHTML = "";
+
+        let total = 0;
+        cart.forEach((item, index) => {
+          const itemTotal = item.harga * item.qty;
+          total += itemTotal;
+
+          const li = document.createElement("li");
+          li.className = "list-group-item";
+          li.innerHTML = `
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <strong>${item.nama}</strong><br>
+              <small>Rp ${item.harga.toLocaleString()} × </small>
+              <div class="qty-control d-inline-flex mt-1">
+                <button class="btn btn-sm btn-outline-danger" onclick="decreaseQty(${index})">-</button>
+                <span class="qty mx-2">${item.qty}</span>
+                <button class="btn btn-sm btn-outline-success" onclick="increaseQty(${index})">+</button>
+              </div>
+            </div>
+            <span>Rp ${itemTotal.toLocaleString()}</span>
+          </div>
+        `;
+          cartList.appendChild(li);
+        });
+
+        totalDisplay.textContent = "Rp " + total.toLocaleString();
+
+        if (cart.length === 0) {
+          clearCartBtn.style.display = "none";
+        } else {
+          clearCartBtn.style.display = "block";
+        }
+      }
+
+      function switchView(view) {
+        currentView = view;
+        currentPage = 1;
+
+        document
+          .getElementById("card-view-btn")
+          .classList.toggle("active", view === "card");
+        document
+          .getElementById("table-view-btn")
+          .classList.toggle("active", view === "table");
+
+        document.querySelector(".card-view-container").style.display =
+          view === "card" ? "block" : "none";
+        document.querySelector(".table-view-container").style.display =
+          view === "table" ? "block" : "none";
+
+        renderProducts();
+      }
+
+      function addToCart(productId) {
+        const product = allProducts.find((p) => p.id === productId);
+        if (!product) return;
+
+        const existing = cart.find((item) => item.id === productId);
+        if (existing) {
+          existing.qty++;
+        } else {
+          cart.push({
+            id: product.id,
+            nama: product.nama,
+            harga: product.harga,
+            gambar: product.gambar || "",
+            kategori: product.kategori || "general",
+            qty: 1,
+          });
+        }
+
+        localStorage.setItem("shoppingCart", JSON.stringify(cart));
+
+        renderCart();
+      }
+
+      function increaseQty(index) {
+        cart[index].qty++;
+
+        localStorage.setItem("shoppingCart", JSON.stringify(cart));
+        renderCart();
+      }
+
+      function decreaseQty(index) {
+        if (cart[index].qty > 1) {
+          cart[index].qty--;
+        } else {
+          cart.splice(index, 1);
+        }
+
+        localStorage.setItem("shoppingCart", JSON.stringify(cart));
+        renderCart();
+      }
+
+      function checkout() {
+        if (cart.length === 0) {
+          modals.emptyCart.show();
+          return;
+        }
+
+        const nama = document.getElementById("namaPemesan").value.trim();
+        const alamat = document.getElementById("alamatPemesan").value.trim();
+        const metode = document.getElementById("metodePembayaran").value;
+
+        if (!nama || !alamat || !metode) {
+          alert("Harap lengkapi data pemesan dan pilih metode pembayaran.");
+          return;
+        }
+
+        const confirmModal = new bootstrap.Modal(document.getElementById("confirmCheckoutModal"));
+        document.getElementById("agreeTerms").checked = false;
+        document.getElementById("confirmCheckoutBtn").disabled = true;
+        confirmModal.show();
+      }
+
+      function processCheckout() {
+        const nama = document.getElementById("namaPemesan").value.trim();
+        const alamat = document.getElementById("alamatPemesan").value.trim();
+        const metode = document.getElementById("metodePembayaran").value;
+        
+        const payload = JSON.stringify({
+          namaPemesan: nama,
+          alamatPemesan: alamat,
+          metodePembayaran: metode,
+          order: cart.map((item) => ({
+            namaBarang: item.nama,
+            harga: item.harga,
+            qty: item.qty,
+          })),
+        });
+
+        console.log("Sending payload:", payload);
+
+        modals.loading.show();
+
+        fetch(webAppURL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain",  
+          },
+          body: payload,
+          mode: "no-cors"  
+        })
+          .then((response) => {
+      
+            modals.loading.hide();
+            modals.success.show();
+
+            cart = [];
+            renderCart();
+
+            localStorage.removeItem("shoppingCart");
+          })
+          .catch((err) => {
+            modals.loading.hide();
+
+            document.getElementById("errorMessage").textContent =
+              "Gagal mengirim pesanan: " + err.message;
+            modals.error.show();
+
+            console.error("Fetch error:", err);
+          });
+      }
+
+      function parseCSVRow(row) {
+        const result = [];
+        let startIdx = 0;
+        let inQuotes = false;
+
+        for (let i = 0; i < row.length; i++) {
+          if (row[i] === '"') {
+            inQuotes = !inQuotes;
+          } else if ((row[i] === "," && !inQuotes) || i === row.length - 1) {
+            let endIdx = i === row.length - 1 ? i + 1 : i;
+            let field = row.substring(startIdx, endIdx);
+
+            if (field.startsWith('"') && field.endsWith('"')) {
+              field = field.substring(1, field.length - 1);
+            }
+
+            result.push(field);
+            startIdx = i + 1;
+          }
+        }
+
+        return result;
+      }
+
+      function extractPrice(priceString) {
+        const numericMatch = priceString.match(/\d+/);
+        if (numericMatch) {
+          return parseInt(numericMatch[0], 10);
+        }
+        return 0;
+      }
+
+      function loadProducts() {
+        fetch(sheetURL)
+          .then((res) => res.text())
+          .then((data) => {
+            const rows = data.trim().split("\n").slice(1); 
+            allProducts = [];
+            productIndex = 0;
+
+            rows.forEach((row) => {
+              const fields = parseCSVRow(row);
+              if (fields.length < 6) return;
+
+              const nama = fields[0].trim();
+              const gambar = fields[1].trim();
+              const stok = parseInt(fields[2], 10);
+              const hargaRaw = fields[3].trim();
+              const deskripsi = fields[4].trim();
+              const kategori = fields[5].trim();
+
+              const harga = extractPrice(hargaRaw);
+
+              if (isNaN(stok) || stok <= 0) return;
+
+              const productId = ++productIndex;
+
+              allProducts.push({
+                id: productId,
+                nama,
+                gambar,
+                stok,
+                harga,
+                deskripsi,
+                kategori,
+              });
+            });
+
+            filterProducts();
+          })
+          .catch((error) => {
+            console.error("Error loading products:", error);
+            document.getElementById(
+              "product-list"
+            ).innerHTML = `<div class="col-12 text-center text-danger">
+              <p>Gagal memuat produk. Silakan coba lagi nanti.</p>
+            </div>`;
+
+            document.getElementById("errorMessage").textContent =
+              "Gagal memuat produk. Silakan coba lagi nanti.";
+            modals.error.show();
+          });
+      }
+
+      function filterProducts() {
+        const selectedCategory =
+          document.getElementById("filter-category").value;
+
+        if (selectedCategory === "all") {
+          filteredProducts = [...allProducts];
+        } else {
+          filteredProducts = allProducts.filter(
+            (product) => product.kategori === selectedCategory
+          );
+        }
+
+        currentPage = 1;
+        renderProducts();
+      }
+
+      function renderProducts() {
+        renderPagination();
+
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(
+          startIndex + itemsPerPage,
+          filteredProducts.length
+        );
+        const currentProducts = filteredProducts.slice(startIndex, endIndex);
+
+        if (currentView === "card") {
+          renderCardView(currentProducts);
+        } else {
+          renderTableView(currentProducts);
+        }
+      }
+
+      function renderCardView(products) {
+        const productList = document.getElementById("product-list");
+        productList.innerHTML = "";
+
+        if (products.length === 0) {
+          productList.innerHTML = `
+          <div class="col-12 text-center">
+            <p>Tidak ada produk yang ditemukan.</p>
+          </div>
+        `;
+          return;
+        }
+
+        products.forEach((product) => {
+          const col = document.createElement("div");
+          col.className = "col-md-4 mb-4 product-card";
+          col.setAttribute("data-category", product.kategori);
+          col.innerHTML = `
+          <div class="card h-100">
+            <img src="${product.gambar}" class="card-img-top" alt="${
+            product.nama
+          }" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+            <div class="card-body text-center">
+              <h5 class="card-title">${product.nama}</h5>
+              <p class="card-text">Rp ${product.harga.toLocaleString()}</p>
+              <p class="card-text"><small class="text-muted">${
+                product.deskripsi || ""
+              }</small></p>
+              <p class="card-text"><small class="text-muted">Kategori: ${
+                product.kategori
+              }</small></p>
+              <button class="btn btn-sm btn-outline-success" onclick="addToCart(${
+                product.id
+              })">
+                <span>Tambah ke Keranjang</span>
+              </button>
+            </div>
+          </div>
+        `;
+          productList.appendChild(col);
+        });
+      }
+
+      function renderTableView(products) {
+        const productTable = document.getElementById("product-table");
+        productTable.innerHTML = "";
+
+        if (products.length === 0) {
+          productTable.innerHTML = `
+          <tr>
+            <td colspan="5" class="text-center">Tidak ada produk yang ditemukan.</td>
+          </tr>
+        `;
+          return;
+        }
+
+        products.forEach((product) => {
+          const row = document.createElement("tr");
+          row.setAttribute("data-category", product.kategori);
+          row.innerHTML = `
+          <td>${product.nama}</td>
+          <td>Rp ${product.harga.toLocaleString()}</td>
+          <td>${product.kategori || "-"}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" onclick="addToCart(${
+              product.id
+            })">
+              Tambah
+            </button>
+          </td>
+        `;
+          productTable.appendChild(row);
+        });
+      }
+
+      function renderPagination() {
+        const pagination = document.getElementById("pagination");
+        pagination.innerHTML = "";
+
+        const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
+        if (totalPages <= 1) {
+          pagination.style.display = "none";
+          return;
+        }
+
+        pagination.style.display = "flex";
+
+        // Previous button
+        const prevLi = document.createElement("li");
+        prevLi.className = `page-item ${currentPage === 1 ? "disabled" : ""}`;
+        prevLi.innerHTML = `
+        <a class="page-link" href="#" aria-label="Previous" ${
+          currentPage > 1
+            ? `onclick="goToPage(${currentPage - 1}); return false;"`
+            : ""
+        }>
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      `;
+        pagination.appendChild(prevLi);
+
+        // Page numbers
+        const maxVisiblePages = 5;
+        let startPage = Math.max(
+          1,
+          currentPage - Math.floor(maxVisiblePages / 2)
+        );
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+        if (endPage - startPage + 1 < maxVisiblePages) {
+          startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+
+        if (startPage > 1) {
+          const firstLi = document.createElement("li");
+          firstLi.className = "page-item";
+          firstLi.innerHTML = `
+          <a class="page-link" href="#" onclick="goToPage(1); return false;">1</a>
+        `;
+          pagination.appendChild(firstLi);
+
+          if (startPage > 2) {
+            const ellipsisLi = document.createElement("li");
+            ellipsisLi.className = "page-item disabled";
+            ellipsisLi.innerHTML = `
+            <a class="page-link" href="#">...</a>
+          `;
+            pagination.appendChild(ellipsisLi);
+          }
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+          const pageLi = document.createElement("li");
+          pageLi.className = `page-item ${i === currentPage ? "active" : ""}`;
+          pageLi.innerHTML = `
+          <a class="page-link" href="#" onclick="goToPage(${i}); return false;">${i}</a>
+        `;
+          pagination.appendChild(pageLi);
+        }
+
+        if (endPage < totalPages) {
+          if (endPage < totalPages - 1) {
+            const ellipsisLi = document.createElement("li");
+            ellipsisLi.className = "page-item disabled";
+            ellipsisLi.innerHTML = `
+            <a class="page-link" href="#">...</a>
+          `;
+            pagination.appendChild(ellipsisLi);
+          }
+
+          const lastLi = document.createElement("li");
+          lastLi.className = "page-item";
+          lastLi.innerHTML = `
+          <a class="page-link" href="#" onclick="goToPage(${totalPages}); return false;">${totalPages}</a>
+        `;
+          pagination.appendChild(lastLi);
+        }
+
+        // Next button
+        const nextLi = document.createElement("li");
+        nextLi.className = `page-item ${
+          currentPage === totalPages ? "disabled" : ""
+        }`;
+        nextLi.innerHTML = `
+        <a class="page-link" href="#" aria-label="Next" ${
+          currentPage < totalPages
+            ? `onclick="goToPage(${currentPage + 1}); return false;"`
+            : ""
+        }>
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      `;
+        pagination.appendChild(nextLi);
+      }
+
+      function goToPage(page) {
+        currentPage = page;
+        renderProducts();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      function clearCart() {
+        if (cart.length === 0) {
+          modals.emptyCart.show();
+          return;
+        }
+
+        const clearCartModal = new bootstrap.Modal(
+          document.getElementById("clearCartModal")
+        );
+        clearCartModal.show();
+
+        document
+          .getElementById("confirmClearCart")
+          .addEventListener("click", function () {
+            cart = [];
+
+            localStorage.removeItem("shoppingCart");
+
+            renderCart();
+
+            clearCartModal.hide();
+          });
+      }
+
+      function checkFormContent() {
+        const namaPemesan = document.getElementById("namaPemesan").value.trim();
+        const alamatPemesan = document.getElementById("alamatPemesan").value.trim();
+        const metodePembayaran = document.getElementById("metodePembayaran").value;
+
+        const clearFormBtn = document.getElementById("clear-form");
+
+        if (namaPemesan || alamatPemesan || metodePembayaran) {
+          clearFormBtn.style.display = "inline";
+        } else {
+          clearFormBtn.style.display = "none"; 
+        }
+      }
+
+      function addConfirmationModal() {
+        const modalHTML = `
+        <div class="modal fade" id="confirmCheckoutModal" tabindex="-1" aria-labelledby="confirmCheckoutModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="confirmCheckoutModalLabel">Konfirmasi Pesanan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Apakah Anda yakin ingin melanjutkan proses checkout?</p>
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                  <label class="form-check-label" for="agreeTerms">
+                    Saya setuju dengan syarat dan ketentuan yang berlaku
+                  </label>
+                  <div class="invalid-feedback">
+                    Anda harus menyetujui syarat dan ketentuan untuk melanjutkan.
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" id="confirmCheckoutBtn" disabled>Proses Pesanan</button>
+              </div>
+            </div>
+          </div>
+        </div>`;
+
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+        document.getElementById('agreeTerms').addEventListener('change', function() {
+          document.getElementById('confirmCheckoutBtn').disabled = !this.checked;
+        });
+
+        document.getElementById('confirmCheckoutBtn').addEventListener('click', function() {
+          const confirmModal = bootstrap.Modal.getInstance(document.getElementById('confirmCheckoutModal'));
+          confirmModal.hide();
+          processCheckout();
+        });
+      }
+    </script>
+  </body>
+</html>
